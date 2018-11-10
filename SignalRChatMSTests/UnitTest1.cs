@@ -6,14 +6,14 @@ namespace SignalRChatMSTests
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethod1()
+        public void OnePlusOneEqualsTwo()
         {
             Assert.AreEqual(2, (1+1));
         }
         [TestMethod]
-        public void TestMethod2()
+        public void TwoPlusTwoEqualsFour()
         {
-            Assert.AreEqual(2, (1 + 1));
+            Assert.AreEqual(4, (2 + 2));
         }
     }
 }
