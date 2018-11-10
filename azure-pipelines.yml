@@ -15,10 +15,10 @@ steps:
 
 - task: DotNetCoreInstaller@0
   inputs:
-  version: '2.1' # replace this value with the version that you need for your project
+  version: '2.1.300' # replace this value with the version that you need for your project
 
 - task: DotNetCoreCLI@2
   inputs:
   command: test
-  projects: '/SignalRChatMSTests/SignalRChatMSTests.csproj'
+  projects: '**/*Tests/*.csproj'
   arguments: '--configuration $(buildConfiguration)'
