@@ -13,7 +13,7 @@ namespace SignalRChatMSTests
         [TestMethod]
         public void TestMethod2()
         {
-            Assert.AreEqual(1, (1 + 1));
+            Assert.AreEqual(2, (1 + 1));
         }
     }
 }
