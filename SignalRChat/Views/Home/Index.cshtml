@@ -6,7 +6,7 @@
         <div class="col-6">
             User..........<input type="text" id="userInput" />
             <br />
-            Message...<input type="text" id="messageInput" />
+            Message...<input type="text" id="messageInput" onfocus="clearMessageBox()"/>
             <input type="button" id="sendButton" value="Send Message" />
         </div>
     </div>
@@ -24,3 +24,4 @@
 </div>
 <script src="~/lib/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/chat.js"></script>
+<script src="~/js/site.js"></script>
