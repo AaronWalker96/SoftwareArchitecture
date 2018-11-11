@@ -9,3 +9,8 @@ software system in a professional manner (tools, techniques and practices).
 
 ## Messaging Microservice 
 I have been tasked with developing a messaging system for the application the team is building, I have decided to implement this as a microservice. 
+
+## Test Environment
+A test environment is available at: https://threeamigosmessaging.azurewebsites.net/
+
+For testing, open the web app in 2 seperate browser windows in order to communicate between the two
