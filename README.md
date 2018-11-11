@@ -1,4 +1,4 @@
-# # SoftwareArchitecture
+# SoftwareArchitecture
 Git repo for my software architecture University module. This module is team based and I will be using this git repo to store my own code for the project. 
 
 **Assignment Introduction:**
