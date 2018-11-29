@@ -22,3 +22,7 @@ document.getElementById("sendButton").addEventListener("click", function (event)
     });
     event.preventDefault();
 });
+
+document.getElementById("pleaseWork").addEventListener("click", function (event) {
+    alert("It worked!");
+});
