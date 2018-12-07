@@ -39,7 +39,7 @@ namespace SignalRChat
 
             services.AddSignalR();
 
-            var connection = @"Server = tcp:threeamigosmessagingdb.database.windows.net,1433; Initial Catalog = ThreeAmigosMessagingdb; Persist Security Info = False; User ID = { q5045715@live.tees.ac.uk }; Password ={ 3727WaonAz }; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;";
+            var connection = "Server=tcp:threeamigosmessagingdb.database.windows.net,1433;Initial Catalog=ThreeAmigosMessagingdb;Persist Security Info=False;User ID=q5045715;Password=3727WaonAz;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30";
             //var connection = @"Server=(localdb)\mssqllocaldb;Database=EFGetStarted.AspNetCore.NewDb;Trusted_Connection=True;";
             services.AddDbContext<MessagingContext>
                 (options => options.UseSqlServer(connection));
