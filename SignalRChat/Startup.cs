@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SignalRChat.Hubs;
 using EFGetStarted.AspNetCore.NewDb.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using SignalRChat.Areas.Identity.Data;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace SignalRChat
 {
@@ -34,15 +33,29 @@ namespace SignalRChat
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddDbContext<SignalRChatIdentityDbContext>
+                (options => options.UseSqlServer(Configuration.GetConnectionString("SignalRChatIdentityDbContextConnection")));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            System.Diagnostics.Debug.WriteLine("Added DB conext");
+
+            services.AddDefaultIdentity<IdentityUser>()
+                .AddEntityFrameworkStores<SignalRChatIdentityDbContext>();
+
+            services.AddMvc(
+                options =>
+                {
+                    var policy = new AuthorizationPolicyBuilder()
+                        .RequireAuthenticatedUser()
+                        .Build();
+                    options.Filters.Add(new AuthorizeFilter(policy));
+                }
+                )
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddSignalR();
 
-            var connection = "Server=tcp:threeamigosmessagingdb.database.windows.net,1433;Initial Catalog=ThreeAmigosMessagingdb;Persist Security Info=False;User ID=q5045715;Password=3727WaonAz;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30";
-            //var connection = @"Server=(localdb)\mssqllocaldb;Database=EFGetStarted.AspNetCore.NewDb;Trusted_Connection=True;";
             services.AddDbContext<MessagingContext>
-                (options => options.UseSqlServer(connection));
+                (options => options.UseSqlServer(Configuration.GetConnectionString("MessagesDbContextConnection")));
 
         }
 
@@ -62,6 +75,7 @@ namespace SignalRChat
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseAuthentication();
 
             app.UseSignalR(routes =>
             {

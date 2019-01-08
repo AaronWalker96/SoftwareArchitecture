@@ -14,7 +14,7 @@ namespace SignalRChat.Hubs
             _context = context;
         }
 
-        //[Authorize]
+        [Authorize]
         public async Task SendMessage(string user, string message)
         {
             _context.Message.Add(new Message() { MessageText = message, SentFrom = user });
