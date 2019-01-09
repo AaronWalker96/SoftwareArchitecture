@@ -17,5 +17,6 @@ namespace EFGetStarted.AspNetCore.NewDb.Models
         public int MessageId { get; set; }
         public string MessageText { get; set; }
         public string SentFrom { get; set; }
+        public string SentTo { get; internal set; }
     }
 }

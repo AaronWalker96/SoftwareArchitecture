@@ -15,13 +15,16 @@
             <th>
                 @Html.DisplayNameFor(model => model.SentFrom)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SentTo)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            @if (@item.SentFrom.Equals(@User.Identity.Name))
+            @if (@item.SentFrom.Equals(@User.Identity.Name) || @item.SentTo.Equals(@User.Identity.Name)) /* This if statement filters out only the logged in users sent messages */
             {
                 <tr>
                     <td>
@@ -29,6 +32,9 @@
                     </td>
                     <td>
                         @item.SentFrom
+                    </td>
+                    <td>
+                        @item.SentTo
                     </td>
                 </tr>
             }
