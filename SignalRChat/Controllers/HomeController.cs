@@ -22,16 +22,9 @@ namespace SignalRChat.Controllers
             return View();
         }
 
-        public IActionResult About()
+        public IActionResult History()
         {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
+            ViewData["Message"] = "Here you'll be able to see your messaging history";
 
             return View();
         }
