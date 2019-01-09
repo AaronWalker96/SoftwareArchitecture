@@ -2325,7 +2325,7 @@ function formatArrayBuffer(data) {
     return str.substr(0, str.length - 1);
 }
 /** @private */
-function sendMessage(logger, transportName, httpClient, url, accessTokenFactory, content, logMessageContent) {
+    function sendMessage(logger, transportName, httpClient, url, accessTokenFactory, content, logMessageContent) {
     return __awaiter(this, void 0, void 0, function () {
         var _a, headers, token, response;
         return __generator(this, function (_b) {

@@ -15,12 +15,13 @@ namespace SignalRChat.Hubs
         }
 
         [Authorize]
-        public async Task SendMessage(string user, string message)
+        public async Task SendMessage(string message)
         {
-            _context.Message.Add(new Message() { MessageText = message, SentFrom = user });
+            var userName = Context.User.Identity.Name;
+            _context.Message.Add(new Message() { MessageText = message, SentFrom = userName });
             _context.SaveChanges();
 
-            await Clients.All.SendAsync("ReceiveMessage", user, message);
+            await Clients.All.SendAsync("ReceiveMessage", userName, message);
         }
     }
 }

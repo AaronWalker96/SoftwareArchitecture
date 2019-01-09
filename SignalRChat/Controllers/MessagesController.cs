@@ -15,8 +15,7 @@ namespace SignalRChat.Controllers
 
         public MessagesController(MessagingContext context)
         {
-            _context = context;
-            _context.Database.EnsureCreated();
+            _context = context; 
         }
 
         // GET: Messages
