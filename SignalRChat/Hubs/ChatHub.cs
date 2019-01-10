@@ -20,7 +20,7 @@ namespace SignalRChat.Hubs
         [Authorize]
         public async Task SendMessage(string message, string sentTo)
         {
-            string userName = "Unavailable";
+            string userName; 
             try
             {
                 userName = Context.User.Identity.Name;
@@ -29,23 +29,11 @@ namespace SignalRChat.Hubs
             }
             catch (System.NullReferenceException)
             {
+                //Username unavailable
                 userName = "Unavailable";
             }
-            try
-            {
-                await Clients.All.SendAsync("ReceiveMessage", userName, message);
-            }
-            catch(SystemException)
-            {
-                Console.WriteLine("This failed");
-            }
-        }
 
-        [Authorize]
-        public string ForUnitTest()
-        {
-            //Can I access this method even though it says [Authorize]?
-            return "test";
+            await Clients.All.SendAsync("ReceiveMessage", userName, message);
         }
     }
 }

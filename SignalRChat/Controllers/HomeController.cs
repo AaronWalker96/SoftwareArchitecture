@@ -24,13 +24,8 @@ namespace SignalRChat.Controllers
 
         public IActionResult History()
         {
-            ViewData["Message"] = "Here you'll be able to see your messaging history";
+            ViewData["Message"] = "Here you can see your messaging history";
 
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
             return View();
         }
 
