@@ -1,6 +1,7 @@
 ﻿using EFGetStarted.AspNetCore.NewDb.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.SignalR;
+using System;
 using System.Collections.Concurrent;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -16,20 +17,35 @@ namespace SignalRChat.Hubs
                 _context = context;
         }
 
-        public ChatHub()
-        {
-
-        }
-
         [Authorize]
         public async Task SendMessage(string message, string sentTo)
         {
-            var userName = Context.User.Identity.Name;
-            _context.Message.Add(new Message() { MessageText = message, SentFrom = userName, SentTo = sentTo });
-            _context.SaveChanges();
+            string userName = "Unavailable";
+            try
+            {
+                userName = Context.User.Identity.Name;
+                _context.Message.Add(new Message() { MessageText = message, SentFrom = userName, SentTo = sentTo });
+                _context.SaveChanges();
+            }
+            catch (System.NullReferenceException)
+            {
+                userName = "Unavailable";
+            }
+            try
+            {
+                await Clients.All.SendAsync("ReceiveMessage", userName, message);
+            }
+            catch(SystemException)
+            {
+                Console.WriteLine("This failed");
+            }
+        }
 
-            await Clients.All.SendAsync("ReceiveMessage", userName, message);
-            //await Clients.User("aaron@test.com").SendAsync("ReceiveMessage", userName, message);
+        [Authorize]
+        public string ForUnitTest()
+        {
+            //Can I access this method even though it says [Authorize]?
+            return "test";
         }
     }
 }

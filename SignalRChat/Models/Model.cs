@@ -5,8 +5,7 @@ namespace EFGetStarted.AspNetCore.NewDb.Models
 {
     public class MessagingContext : DbContext
     {
-        public MessagingContext(DbContextOptions<MessagingContext> options)
-            : base(options)
+        public MessagingContext(DbContextOptions<MessagingContext> options) : base(options)
         { }
 
         public DbSet<Message> Message { get; set; }
