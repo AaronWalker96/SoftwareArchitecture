@@ -10,11 +10,15 @@ namespace SignalRChat.Hubs
     public class ChatHub : Hub
     {
         private MessagingContext _context;
-        private static ConcurrentDictionary<string, string> clients = new ConcurrentDictionary<string, string>();
 
         public ChatHub(MessagingContext context)
         {
-            _context = context;
+                _context = context;
+        }
+
+        public ChatHub()
+        {
+
         }
 
         [Authorize]
